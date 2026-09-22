@@ -27,7 +27,6 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        # Прапорець --no-save або примусовий install допомагає Bun розгорнути node_modules у середовищі CI
         run: bun install
 
       - name: Build
@@ -36,7 +35,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/client
+          path: .output/public
 
   deploy:
     environment:
