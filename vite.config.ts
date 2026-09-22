@@ -5,21 +5,20 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  // Базовый URL для статических ассетов
-  base: "/newernice/",
+  base: "/newernice/", // Базовый URL для GitHub Pages
   plugins: [
     tailwindcss(),
     ...tanstackStart({
-      // Указываем статический таргет для генерации статики (SSG) под GitHub Pages
-      target: "static",
+      prerender: {
+        enabled: true, // <--- Включаем генерацию статических HTML-файлов
+      },
+      server: { entry: "server" },
     }),
     react(),
   ],
   resolve: {
     alias: {
-      "@tanstack/react-router/ssr/server": resolve(
-        "./node_modules/@tanstack/react-router/src/ssr/server.ts"
-      ),
+      "@tanstack/react-router/ssr/server": resolve("./node_modules/@tanstack/react-router/src/ssr/server.ts"),
     },
   },
 });
