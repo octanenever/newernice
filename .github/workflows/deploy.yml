@@ -32,10 +32,19 @@ jobs:
       - name: Build
         run: bun run build
 
+      - name: Debug build output
+        run: |
+          echo "=== Checking generated directories ==="
+          ls -la
+          echo "=== Checking .output ==="
+          ls -la .output || true
+          echo "=== Checking dist ==="
+          ls -la dist || true
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .output/public
+          path: dist/client
 
   deploy:
     environment:
