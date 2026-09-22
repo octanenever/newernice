@@ -1,15 +1,21 @@
 import { defineConfig } from "vite";
+import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
-import { tanstackStart } from "@tanstack/start/config";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  base: "/librarian-code-quest/",
+  base: "/newernice/",
   plugins: [
-    react(),
-    tsconfigPaths(),
-    tanstackStart({
+    tailwindcss(),
+    ...tanstackStart({
       server: { entry: "server" },
     }),
+    react(),
   ],
+  resolve: {
+    alias: {
+      "@tanstack/react-router/ssr/server": resolve("./node_modules/@tanstack/react-start/node_modules/@tanstack/react-router/dist/esm/ssr/server.js"),
+    },
+  },
 });
