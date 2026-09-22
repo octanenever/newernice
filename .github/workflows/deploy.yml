@@ -23,8 +23,11 @@ jobs:
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
       - name: Install dependencies
+        # Прапорець --no-save або примусовий install допомагає Bun розгорнути node_modules у середовищі CI
         run: bun install
 
       - name: Build
@@ -33,7 +36,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          # Для TanStack Start збірка зазвичай йде в .output/public. 
+          # Якщо у вас у package.json налаштовано інакше — вкажіть вашу папку (наприклад, dist)
+          path: .output/public
 
   deploy:
     environment:
