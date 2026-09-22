@@ -15,7 +15,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@tanstack/react-router/ssr/server": resolve("./node_modules/@tanstack/react-start/node_modules/@tanstack/react-router/dist/esm/ssr/server.js"),
+      "@tanstack/react-router/ssr/server": resolve("./node_modules/@tanstack/react-router/src/ssr/server.ts"),
     },
   },
 });
